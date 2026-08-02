@@ -1,0 +1,137 @@
+[
+  {
+    "appid": 730,
+    "name": "Counter-Strike 2",
+    "genre": "Shooter",
+    "price": 0.0,
+    "rating": 87,
+    "playtime_forever": 154320,
+    "release_year": 2012
+  },
+  {
+    "appid": 570,
+    "name": "Dota 2",
+    "genre": "Strategy",
+    "price": 0.0,
+    "rating": 82,
+    "playtime_forever": 98450,
+    "release_year": 2013
+  },
+  {
+    "appid": 1091500,
+    "name": "Cyberpunk 2077",
+    "genre": "RPG",
+    "price": 59.99,
+    "rating": 86,
+    "playtime_forever": 4210,
+    "release_year": 2020
+  },
+  {
+    "appid": 1245620,
+    "name": "Elden Ring",
+    "genre": "RPG",
+    "price": 59.99,
+    "rating": 95,
+    "playtime_forever": 8890,
+    "release_year": 2022
+  },
+  {
+    "appid": 413150,
+    "name": "Stardew Valley",
+    "genre": "Simulation",
+    "price": 14.99,
+    "rating": 97,
+    "playtime_forever": 12340,
+    "release_year": 2016
+  },
+  {
+    "appid": 1938090,
+    "name": "Call of Duty",
+    "genre": "Shooter",
+    "price": 69.99,
+    "rating": 71,
+    "playtime_forever": 3200,
+    "release_year": 2022
+  },
+  {
+    "appid": 1174180,
+    "name": "Red Dead Redemption 2",
+    "genre": "Action",
+    "price": 59.99,
+    "rating": 93,
+    "playtime_forever": 6700,
+    "release_year": 2019
+  },
+  {
+    "appid": 1868140,
+    "name": "DAVE THE DIVER",
+    "genre": "Simulation",
+    "price": 19.99,
+    "rating": 96,
+    "playtime_forever": 1890,
+    "release_year": 2023
+  },
+  {
+    "appid": 1888930,
+    "name": "The Last of Us Part I",
+    "genre": "Action",
+    "price": 59.99,
+    "rating": 79,
+    "playtime_forever": 2150,
+    "release_year": 2023
+  },
+  {
+    "appid": 1145360,
+    "name": "Hades",
+    "genre": "Roguelike",
+    "price": 24.99,
+    "rating": 98,
+    "playtime_forever": 5430,
+    "release_year": 2020
+  },
+  {
+    "appid": 892970,
+    "name": "Valheim",
+    "genre": "Survival",
+    "price": 19.99,
+    "rating": 94,
+    "playtime_forever": 7650,
+    "release_year": 2021
+  },
+  {
+    "appid": 1097150,
+    "name": "Fall Guys",
+    "genre": "Party",
+    "price": 0.0,
+    "rating": 61,
+    "playtime_forever": 890,
+    "release_year": 2020
+  },
+  {
+    "appid": 1517290,
+    "name": "Battlefield 2042",
+    "genre": "Shooter",
+    "price": 39.99,
+    "rating": 44,
+    "playtime_forever": 1200,
+    "release_year": 2021
+  },
+  {
+    "appid": 632470,
+    "name": "Disco Elysium",
+    "genre": "RPG",
+    "price": 39.99,
+    "rating": 96,
+    "playtime_forever": 3800,
+    "release_year": 2019
+  },
+  {
+    "appid": 1966720,
+    "name": "Lethal Company",
+    "genre": "Horror",
+    "price": 9.99,
+    "rating": 97,
+    "playtime_forever": 4560,
+    "release_year": 2023
+  }
+]

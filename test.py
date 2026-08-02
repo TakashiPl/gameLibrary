@@ -1,0 +1,8 @@
+from library import GameLibrary
+
+library = GameLibrary.from_json("data/steam_library.json")
+
+print(len(library))
+
+print(library.games[0])
+print(library.games[0].playtime_hours())
