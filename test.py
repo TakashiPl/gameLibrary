@@ -1,4 +1,5 @@
 from library import GameLibrary
+from recommender import d
 
 library = GameLibrary.from_json("data/steam_library.json")
 
