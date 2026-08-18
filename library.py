@@ -1,12 +1,24 @@
 import json
 from pathlib import Path
 from models import Game
+import time
+from functools import wraps
 
+def measure_time(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.perf_counter()
+            result = func(*args,**kwargs)
+            end_time = time.perf_counter()
+            print(end_time - start_time)
+            return result
+        return wrapper
 class GameLibrary:
     def __init__(self,games: list[Game]) -> None:
         self.games = games
 
     @classmethod
+    @measure_time
     def from_json(cls, path: str | Path) -> "GameLibrary":
         with open(path, "r", encoding="utf-8") as f:
             raw_data = json.load(f)
@@ -16,12 +28,6 @@ class GameLibrary:
     def __len__(self) -> int:
         return len(self.games)
 
-    def filter_by_genre(self, genre: str) -> list[Game]:
-        return [game for game in self.games if game.genre.lower() == genre.lower()]
-
-    def filter_by_min_rating(self, min_rating: int) -> list[Game]:
-        return [game for game in self.games if game.rating >= min_rating]
-
-    def iter_batches(self, batch_size: int):
-        for i in range(0, len(self.games), batch_size):
+    def iter_batches(self, batch_size: int = 50):
+        for i in range(0,len(self.games), batch_size):
             yield self.games[i : i + batch_size]
