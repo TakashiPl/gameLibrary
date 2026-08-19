@@ -1,4 +1,4 @@
-# 🎮 Steam Game Recommender & Data Pipeline
+# Steam Game Recommender & Data Pipeline
 
 A modular Python tool designed to clean Steam library data, perform Exploratory Data Analysis (EDA), and suggest similar games using a custom k-NN implementation built from scratch with NumPy.
 
