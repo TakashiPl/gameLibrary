@@ -21,3 +21,10 @@ A modular Python tool designed to clean Steam library data, perform Exploratory 
 1. **Activate virtual environment:**
    ```bash
    source venv/bin/activate  # or .\venv\Scripts\Activate.ps1 on Windows
+2. **Install dependencies:**
+   ```bash
+   pip install pandas numpy matplotlib seaborn
+3. **Run DataPipeline & Visualizations:**
+   ```bash
+   python data_pipeline.py
+   python eda_visualization.py
