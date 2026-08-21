@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, QuantileTransformer
@@ -60,14 +61,13 @@ pipeline = Pipeline(
 )
 
 grid_search = GridSearchCV(
-    pipeline, param_grid, cv=5, scoring="f1_weighted", n_jobs=1
+    pipeline, param_grid, cv=5, scoring="f1_weighted", n_jobs=-1
 )
 
 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, test_size=0.2, stratify=y, random_state=42)
 
-pipeline.fit(X_train, y_train)
 grid_search.fit(X_train,y_train)
 
 print("Best parameters:",grid_search.best_params_)
@@ -75,10 +75,11 @@ print("Best parameters:",grid_search.best_params_)
 best_model = grid_search.best_estimator_
 best_y_pred = best_model.predict(X_test)
 
-y_pred = pipeline.predict(X_test)
 
+cm = confusion_matrix(y_test,best_y_pred, labels=grid_search.classes_)
 
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=grid_search.classes_)
 
-print(classification_report(y_test,y_pred))
+disp.plot()
+plt.show()
 
-print("\n",classification_report(y_test,best_y_pred))
