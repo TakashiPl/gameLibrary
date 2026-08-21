@@ -17,3 +17,4 @@ env/
 
 # Jupyter
 .ipynb_checkpoints/
+test_pipeline.py
