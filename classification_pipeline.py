@@ -83,3 +83,9 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=grid_search.cl
 disp.plot()
 plt.show()
 
+rf = grid_search.best_estimator_.named_steps['classifier']
+
+feature_names = grid_search.best_estimator_.named_steps['preprocessor'].get_feature_names_out()
+
+importances = pd.Series(rf.feature_importances_, index=feature_names)
+print(importances.sort_values(ascending=False).head(10))
