@@ -1,24 +1,53 @@
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, QuantileTransformer
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, ConfusionMatrixDisplay, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import numpy as np
 
-num_features = ["Price_USD","Total_Reviews"]
-cat_features = ["All_Tags","Release_Date"]
+param_grid = {
+    "classifier__max_depth": [5,10,None],
+    "classifier__n_estimators": [50,100],
+    "classifier__min_samples_split": [2,5],
+}
+
+
 
 dataSet = pd.read_csv("data/steam_games_2026.csv")
+dataSet["Release_Date"] = pd.to_datetime(
+    dataSet["Release_Date"], errors="coerce"
+)
+dataSet["Release_Year"] = dataSet["Release_Date"].dt.year
+dataSet["Age_Years"] = 2026 - dataSet["Release_Year"]
+
+dataSet["Age_Years"] = dataSet["Age_Years"].fillna(
+    dataSet["Age_Years"].median()
+)
+
+num_features = ["Price_USD","Total_Reviews", "Age_Years"]
+cat_features = ["All_Tags"]
+
 is_recommended = dataSet["Review_Score_Pct"]>=85
 y = np.array(is_recommended).astype(int)
 X = dataSet[num_features+cat_features]
 
+num_transformer = Pipeline(
+    steps=[
+        ("quantile", 
+         QuantileTransformer(
+            output_distribution="normal",random_state=42, n_quantiles=100
+            )
+        ),
+        ("scaler", StandardScaler())
+    ]
+)
+
 preprocessor = ColumnTransformer(
     transformers=[
-        ("num",StandardScaler(),num_features),
+        ("num",num_transformer,num_features),
         ("cat",OneHotEncoder(handle_unknown="ignore",sparse_output=False),cat_features),
     ]
 )
@@ -26,14 +55,30 @@ preprocessor = ColumnTransformer(
 pipeline = Pipeline(
     steps=[
         ("preprocessor", preprocessor),
-        ("classifier", LogisticRegression(random_state=42)),
+        ("classifier", RandomForestClassifier(random_state=42, n_estimators=100)),
     ]
 )
+
+grid_search = GridSearchCV(
+    pipeline, param_grid, cv=5, scoring="f1_weighted", n_jobs=1
+)
+
+
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, test_size=0.2, stratify=y, random_state=42)
 
 pipeline.fit(X_train, y_train)
+grid_search.fit(X_train,y_train)
+
+print("Best parameters:",grid_search.best_params_)
+
+best_model = grid_search.best_estimator_
+best_y_pred = best_model.predict(X_test)
 
 y_pred = pipeline.predict(X_test)
 
+
+
 print(classification_report(y_test,y_pred))
+
+print("\n",classification_report(y_test,best_y_pred))
