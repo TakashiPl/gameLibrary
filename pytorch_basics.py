@@ -1,6 +1,7 @@
 import pandas as pd
 import torch
 from torch.utils.data import TensorDataset, DataLoader
+import torch.nn as nn
  
 data = pd.read_csv("data/steam_games_2026.csv")
 df = pd.DataFrame(data)
@@ -19,17 +20,20 @@ tensor_DataSet = TensorDataset(tensor_x,tensor_y)
 
 loader = DataLoader(tensor_DataSet,batch_size=32,shuffle=True)
 
-for batch_x,batch_y in loader:
-    print(batch_x.shape, batch_y.shape)
 
-# print("--- TENSOR X (CECHY) ---")
-# print(f"Kształt (Shape): {tensor_x.shape}")
-# print(f"Typ (Dtype):     {tensor_x.dtype}")
-# print(f"Urządzenie:      {tensor_x.device}")
+class SteamClassifier(nn.Module):
+    def __init__(self) -> None:
+        super().__init__()
+        self.fc1 = nn.Linear(2,16)
+        self.fc2 = nn.Linear(16,1)
+        self.relu = nn.ReLU()
+        self.sigmoid = nn.Sigmoid()
+    def forward(self, x):
+        return (self.sigmoid(self.fc2(self.relu(self.fc1(x)))))
 
-# print("\n--- TENSOR Y (TARGET) ---")
-# print(f"Kształt (Shape): {tensor_y.shape}")
-# print(f"Typ (Dtype):     {tensor_y.dtype}")
-# print(f"Urządzenie:      {tensor_y.device}")
-
+model = SteamClassifier()
+batch_x, batch_y = next(iter(loader))
+predictions = model(batch_x)
+print(model, predictions.shape)
+    
 
