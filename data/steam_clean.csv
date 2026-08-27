@@ -8,7 +8,7 @@ appid,name,genre,price,rating,playtime_forever,release_year,playtime_hours,is_fr
 1174180,Red Dead Redemption 2,Action,59.99,93,6700,2019,111.7,False
 1868140,DAVE THE DIVER,Simulation,19.99,96,1890,2023,31.5,False
 1888930,The Last of Us Part I,Action,59.99,79,2150,2023,35.8,False
-1145360,Hades,Roguelike,24.99,98,5430,2020,90.5,False
+1145360,Hades,Roguelike,24.99,98,5430,2020,90.5,False   
 892970,Valheim,Survival,19.99,94,7650,2021,127.5,False
 1097150,Fall Guys,Party,0.0,61,890,2020,14.8,True
 1517290,Battlefield 2042,Shooter,39.99,44,1200,2021,20.0,False
