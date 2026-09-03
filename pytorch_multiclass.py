@@ -49,3 +49,6 @@ for e in range(epochs):
     optimizer.step()
     if e % 5 == 0:
         print(loss.item(),f"This is the: {e} epoch")
+        predicted_classes = torch.argmax(predictions,dim=1)
+        accuracy = (((predicted_classes == tensor_y).sum().item())/len(tensor_y))*100
+        print("Epoch:","("+str(e)+"/20)","|","Loss:","%.4f" % loss.item(),"|","Accuracy","%.2f" % accuracy + "%")
