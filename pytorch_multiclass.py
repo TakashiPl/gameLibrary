@@ -52,3 +52,23 @@ for e in range(epochs):
         predicted_classes = torch.argmax(predictions,dim=1)
         accuracy = (((predicted_classes == tensor_y).sum().item())/len(tensor_y))*100
         print("Epoch:","("+str(e)+"/20)","|","Loss:","%.4f" % loss.item(),"|","Accuracy","%.2f" % accuracy + "%")
+new_games = [[14.99,2000],[59.99,85000]]
+scaled_new_games = scaler.transform(new_games)
+tensor_new = torch.tensor(scaled_new_games,dtype=torch.float32)
+
+model.eval()
+
+with torch.no_grad():
+    raw_preds = model(tensor_new)
+    predicted_indices = torch.argmax(raw_preds,dim=1)
+    predicted_genres = le.inverse_transform(predicted_indices.numpy())
+
+print("\n--- WYNIKI PREDYKCJI DLA NOWYCH GIER ---")
+print(
+    f"Gra A ($14.99, 1200 recenzji) -> Przewidziany gatunek:"
+    f" {predicted_genres[0]}"
+)
+print(
+    f"Gra B ($59.99, 85000 recenzji) -> Przewidziany gatunek:"
+    f" {predicted_genres[1]}"
+)
